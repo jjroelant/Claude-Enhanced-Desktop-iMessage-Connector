@@ -2,6 +2,14 @@
   "name": "imessage-mcp-server",
   "version": "1.0.3",
   "description": "Enhanced iMessage MCP Server for Claude Desktop with multi-handle support and sentiment analysis",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnroelant/Claude-Enhanced-Desktop-iMessage-Connector.git"
+  },
+  "homepage": "https://github.com/johnroelant/Claude-Enhanced-Desktop-iMessage-Connector",
+  "bugs": {
+    "url": "https://github.com/johnroelant/Claude-Enhanced-Desktop-iMessage-Connector/issues"
+  },
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -13,9 +21,14 @@
     "imessage",
     "claude",
     "sqlite",
-    "messages"
+    "messages",
+    "claude-desktop",
+    "connector",
+    "enhanced",
+    "multi-handle",
+    "sentiment-analysis"
   ],
-  "author": "Custom iMessage Connector",
+  "author": "jjroelant@gmail.com",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",

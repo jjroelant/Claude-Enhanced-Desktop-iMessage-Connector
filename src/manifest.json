@@ -1,7 +1,7 @@
 {
   "dxt_version": "1.0.3",
   "name": "Enhanced iMessage Connector",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Enhanced iMessage MCP Server for Claude Desktop with multi-handle support and sentiment analysis",
   "author": {
     "name": "JJ",
@@ -29,7 +29,11 @@
       },
     {
       "name": "get_conversation_stats",
-      "description": "Get detailed statistics about conversations including message counts and date ranges\""
+      "description": "Get detailed statistics about conversations including message counts and date ranges"
+    },
+    {
+      "name": "analyze_message_sentiment",
+      "description": "Analyze messages for sentiment, hostility, or specific keywords"
     }
   ],
   "license": "MIT"
