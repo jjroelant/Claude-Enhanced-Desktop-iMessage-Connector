@@ -1,0 +1,36 @@
+{
+  "dxt_version": "1.0.3",
+  "name": "Enhanced iMessage Connector",
+  "version": "1.0.2",
+  "description": "Enhanced iMessage MCP Server for Claude Desktop with multi-handle support and sentiment analysis",
+  "author": {
+    "name": "JJ",
+    "email": "jjroelant@gmail.com"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/index.js"
+      ],
+      "env": {}
+    }
+  },
+  "tools": [
+      {
+        "name": "enhanced_search_contacts",
+        "description": "Search for contacts in iMessage by name, phone, or email (Enhanced)"
+      },
+      {
+        "name": "enhanced_read_messages",
+        "description": "Read messages from a specific contact with enhanced multi-handle support"
+      },
+    {
+      "name": "get_conversation_stats",
+      "description": "Get detailed statistics about conversations including message counts and date ranges\""
+    }
+  ],
+  "license": "MIT"
+}

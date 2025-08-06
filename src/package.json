@@ -1,0 +1,28 @@
+{
+  "name": "imessage-mcp-server",
+  "version": "1.0.3",
+  "description": "Enhanced iMessage MCP Server for Claude Desktop with multi-handle support and sentiment analysis",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mcp",
+    "imessage",
+    "claude",
+    "sqlite",
+    "messages"
+  ],
+  "author": "Custom iMessage Connector",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "sqlite3": "^5.1.6",
+    "sqlite": "^5.1.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
