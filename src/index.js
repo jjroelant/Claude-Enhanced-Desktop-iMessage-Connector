@@ -42,7 +42,7 @@ class iMessageMCPServer {
     this.server = new Server(
       {
         name: 'imessage-mcp-server',
-        version: '1.1.0',
+        version: '1.1.1',
       },
       {
         capabilities: {
