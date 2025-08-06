@@ -1,8 +1,8 @@
 {
-  "dxt_version": "1.0.3",
+  "dxt_version": "1.1.0",
   "name": "Enhanced iMessage Connector",
-  "version": "1.0.3",
-  "description": "Enhanced iMessage MCP Server for Claude Desktop with multi-handle support and sentiment analysis",
+  "version": "1.1.0",
+  "description": "Enhanced iMessage MCP Server with contact name resolution, group chat support, multi-handle unification, and full message content (no truncation)",
   "author": {
     "name": "JJ",
     "email": "jjroelant@gmail.com"
@@ -19,21 +19,25 @@
     }
   },
   "tools": [
-      {
-        "name": "enhanced_search_contacts",
-        "description": "Search for contacts in iMessage by name, phone, or email (Enhanced)"
-      },
-      {
-        "name": "enhanced_read_messages",
-        "description": "Read messages from a specific contact with enhanced multi-handle support"
-      },
+    {
+      "name": "search_and_read",
+      "description": "Most efficient: Search contacts/groups by name or phone and immediately read messages with participant identification (supports contact names and group chats)"
+    },
+    {
+      "name": "search_contacts", 
+      "description": "Search for contacts by name, phone, or email - returns contact information only (multi-handle support)"
+    },
+    {
+      "name": "read_conversation",
+      "description": "Read messages from specific contact or group with contact name resolution, multi-handle unification, and full message content preservation"
+    },
     {
       "name": "get_conversation_stats",
-      "description": "Get detailed statistics about conversations including message counts and date ranges"
+      "description": "Enhanced analytics for individuals and groups with participant statistics, contact name resolution, and detailed breakdowns"
     },
     {
       "name": "analyze_message_sentiment",
-      "description": "Analyze messages for sentiment, hostility, or specific keywords"
+      "description": "Advanced sentiment analysis for individuals and groups with sender identification, contact name resolution, and customizable keywords"
     }
   ],
   "license": "MIT"

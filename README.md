@@ -1,226 +1,127 @@
 # Enhanced iMessage Connector for Claude Desktop
 
-## 🚀 Why This Extension Exists
+Claude Desktop's built-in iMessage tools don't work reliably - they find 0 contacts when searching and fail with AppleScript errors. This connector fixes those issues and adds new functionality.
 
-**Claude Desktop's built-in iMessage tools are broken.** They find 0 contacts when searching, fail with AppleScript errors, and can't handle multiple phone number formats for the same person.
+## What's Different
 
-**This enhanced connector actually works.** It finds thousands of contacts, reads real messages, and provides powerful analytics - all while being faster and more reliable than the built-in tools.
+| Feature | Built-in Tools | This Connector |
+|---------|---------------|----------------|
+| Contact search | Finds 0 contacts | Search by name, phone, or email |
+| Message reading | Consistently fails | Reads full message content |
+| Multiple handles | Not supported | Unifies SMS/iMessage/email per person |
+| Group chats | Not supported | Full group functionality |
+| Contact names | Phone numbers only | Use contact names like "Mom" |
+| Dependencies | AppleScript (unreliable) | Direct SQLite access |
 
-## ⚡ Performance Comparison
+## Installation
 
-| Feature | Built-in iMessage Tools | Enhanced Connector | Improvement |
-|---------|------------------------|-------------------|-------------|
-| Contact Search | ❌ 0 results | ✅ Hundreds of contacts found | **∞ better** |
-| Message Reading | ❌ Always fails | ✅ Thousands of messages | **Actually works** |
-| Multi-handle Support | ❌ No | ✅ SMS + iMessage + RCS | **New capability** |
-| Conversation Analytics | ❌ No | ✅ Daily breakdowns | **New capability** |
-| Sentiment Analysis | ❌ No | ✅ 35+ hostile keywords | **New capability** |
-| Dependencies | ❌ AppleScript (unreliable) | ✅ Direct SQLite (rock solid) | **Much more stable** |
+1. Download the latest `enhanced-imessage-connector-v1.1.0.dxt` file
+2. Double-click to install in Claude Desktop  
+3. Enable **Full Disk Access** for Claude Desktop in System Settings → Privacy & Security
+4. Restart Claude Desktop
 
-## 🛠️ What This Extension Provides
+## Available Tools
 
-### 4 Powerful Tools:
+### search_and_read
+Search and immediately read messages in one step. Works with contact names, phone numbers, or group names.
 
-1. **🔍 Enhanced Contact Search**
-   - Find contacts by name, phone, or email
-   - Handles different phone number formats automatically
-   - Shows SMS, iMessage, and RCS capabilities per contact
+```
+Enhanced iMessage Connector:search_and_read with query "Mom"
+Enhanced iMessage Connector:search_and_read with query "Work Team" 
+Enhanced iMessage Connector:search_and_read with query "+1234567890" limit 10
+```
 
-2. **💬 Smart Message Reading**
-   - Read actual message content with timestamps
-   - Multi-handle support (same person across SMS/iMessage)
-   - Decodes complex message formats automatically
-   - Configurable date ranges and message limits
+### search_contacts  
+Find contacts without reading messages.
 
-3. **📊 Conversation Analytics**
-   - Message count statistics (sent vs received)
-   - Daily conversation breakdowns
-   - Date range analysis
-   - Communication pattern insights
-
-4. **🔎 Sentiment Analysis**
-   - Detect hostile or problematic messages
-   - 35+ keyword detection patterns
-   - Date-grouped results
-   - Conversation health monitoring
-
-## 📥 Installation (One-Click)
-
-### For Most Users: Download Pre-built Extension
-1. **Download** the latest release: `enhanced-imessage-connector.dxt`
-2. **Double-click** the `.dxt` file to install
-3. **Restart** Claude Desktop
-4. **Enable** Full Disk Access (see below)
-
-### For Security-Conscious Users: Build From Source
-1. **Download** the source code from this repository
-2. **Follow** the instructions in `BUILD.md`
-3. **Build** your own `.dxt` file to verify it's legitimate
-4. **Install** your custom-built version
-
-*Both approaches result in identical functionality - the difference is your level of trust vs convenience.*
-
-### Prerequisites
-- **macOS** with Messages app
-- **Claude Desktop** (latest version)
-- **Full Disk Access** enabled for Claude Desktop
-
-### Enable Full Disk Access:
-1. **System Settings** → Privacy & Security → Full Disk Access
-2. **Add Claude Desktop** to the list
-3. **Restart** Claude Desktop
-
-## 🎯 How to Use
-
-### Basic Contact Search
 ```
 Enhanced iMessage Connector:search_contacts with query "john"
 ```
-Finds all contacts containing "john" in name, phone, or email.
 
-### Read Recent Messages
-```
-Enhanced iMessage Connector:read_messages with phone_number "+1234567890" days_back 7 limit 10
-```
-Gets the last 10 messages from the past 7 days.
+### read_conversation
+Read messages from a specific contact or group.
 
-### Get Conversation Stats
 ```
-Enhanced iMessage Connector:get_conversation_stats with phone_number "+1234567890" days_back 30
-```
-Shows message counts and daily breakdowns for the past 30 days.
-
-### Analyze Message Sentiment
-```
-Enhanced iMessage Connector:analyze_message_sentiment with phone_number "+1234567890" days_back 30
-```
-Detects potentially hostile or concerning messages.
-
-## 🔧 Advanced Usage
-
-### Message Reading Options
-
-| Parameter | Default | Description |
-|-----------|---------|-------------|
-| `phone_number` | Required | Phone number or email (any format) |
-| `days_back` | 60 | How far back to search |
-| `limit` | 50 | Maximum messages to retrieve |
-| `include_sent` | true | Include messages you sent |
-
-### Example: Read All Messages from Someone
-```
-Enhanced iMessage Connector:read_messages with phone_number "+1234567890" days_back 365 limit 1000 include_sent true
+Enhanced iMessage Connector:read_conversation with identifier "Mom" limit 50
+Enhanced iMessage Connector:read_conversation with identifier "group:123" days_back 7
+Enhanced iMessage Connector:read_conversation with identifier "+1234567890" include_sent false
 ```
 
-### Example: Only Received Messages
+### get_conversation_stats
+Get message counts, participant info, and timing data.
+
 ```
-Enhanced iMessage Connector:read_messages with phone_number "+1234567890" days_back 30 limit 50 include_sent false
+Enhanced iMessage Connector:get_conversation_stats with identifier "Mom" days_back 30
+Enhanced iMessage Connector:get_conversation_stats with identifier "group:123"
 ```
 
-### Phone Number Formats
-The connector automatically handles multiple formats:
-- `+12484971266` (international)
-- `(248) 497-1266` (formatted)
-- `248-497-1266` (dashed)
-- `2484971266` (plain)
-- `alex@example.com` (email addresses)
+### analyze_message_sentiment  
+Search for specific keywords or detect potentially hostile messages.
 
-## 📊 Real-World Results
+```
+Enhanced iMessage Connector:analyze_message_sentiment with identifier "group:123" group_by_date true
+Enhanced iMessage Connector:analyze_message_sentiment with identifier "Mom" keywords ["angry","frustrated"]
+```
 
-**Tested Performance** (vs built-in tools):
-- **Contact Discovery**: Finds thousands of contacts vs 0
-- **Message Reading**: Successfully reads message history vs 0
-- **Multi-handle Resolution**: Correctly identifies SMS + iMessage for same contact
-- **Date Range**: Processes messages across multiple years
-- **Error Rate**: 0% vs 100% failure rate for built-in tools
+## Key Features
 
-## 🔒 Privacy & Security
+**Contact name resolution**: Search "Mom" instead of memorizing phone numbers. Works by connecting to your macOS Contacts database.
 
-- **Local Only**: Your messages never leave your Mac
-- **Read-Only**: Extension only reads data, never modifies
-- **Direct Access**: Queries Messages database directly (no cloud)
-- **No Network**: Extension works completely offline
-- **OS Protected**: Requires explicit Full Disk Access permission
+**Multi-handle support**: Finds the same person across SMS, iMessage, and email addresses automatically.
 
-## 🐛 Troubleshooting
+**Group chat support**: Read group messages with participant names identified.
 
-### Extension Won't Install
-- ✅ Verify Claude Desktop is updated to latest version
-- ✅ Download `.dxt` file again (might be corrupted)
-- ✅ Restart Claude Desktop and try again
+**No message truncation**: Preserves full message content instead of cutting off at arbitrary limits.
 
-### Tools Not Available
-- ✅ Check Settings → Extensions shows "Enhanced iMessage Connector" as "Running"
-- ✅ Restart Claude Desktop after installation
-- ✅ Use exact tool names: `Enhanced iMessage Connector:search_contacts`
+**Multiple output formats**: Choose between minimal, compact, or full detail levels.
 
-### Empty Search Results
-- ✅ Verify Full Disk Access is enabled for Claude Desktop
-- ✅ Check that Messages app has message history
-- ✅ Try different search terms (name, phone, email)
+## Technical Details
 
-### No Messages Found
-- ✅ Increase `days_back` parameter (try 365 or 1000)
-- ✅ Verify the contact has message history in Messages app
-- ✅ Try different phone number formats
+- Connects directly to `~/Library/Messages/chat.db` (SQLite)
+- Integrates with `~/Library/Application Support/AddressBook/` for contact names  
+- Requires Full Disk Access permission
+- Works entirely offline - no data leaves your Mac
+- Read-only access - never modifies your messages
 
-### Tool Name Conflicts
-- ✅ Always use full tool names: `Enhanced iMessage Connector:read_messages`
-- ✅ Don't use the old built-in tool names
+## Troubleshooting
 
-## 🆚 Why Not Use Built-in Tools?
+**Extension won't install**
+- Update Claude Desktop to latest version
+- Re-download the .dxt file
+- Restart Claude Desktop
 
-**Built-in iMessage tools consistently fail because:**
-- ❌ **AppleScript Dependencies**: Breaks when Contacts app isn't running
-- ❌ **Single Handle Only**: Can't find same person across SMS/iMessage  
-- ❌ **Poor Contact Matching**: Misses variations in phone number formatting
-- ❌ **No Error Recovery**: Fails silently with no useful feedback
-- ❌ **Limited Functionality**: No analytics, sentiment analysis, or statistics
+**Tools not appearing**  
+- Check Settings → Extensions shows connector as "Running"
+- Use full tool names: `Enhanced iMessage Connector:search_and_read`
+- Restart Claude Desktop after installation
 
-**This enhanced connector solves all these problems** with direct SQLite access and robust phone number matching.
+**Empty search results**
+- Verify Full Disk Access is enabled for Claude Desktop
+- Try different search terms (name, phone, email)
+- Check that Messages app has conversation history
 
-## 🏗️ Technical Architecture
+**No messages found**
+- Increase `days_back` parameter (try 365)
+- Verify the contact has message history in Messages app
+- Try different phone number formats
 
-- **Direct Database Access**: Reads `~/Library/Messages/chat.db` directly
-- **No AppleScript**: Eliminates dependency failures
-- **Multi-handle Resolution**: Finds all phone/email variations per contact
-- **Enhanced Text Extraction**: Decodes attributedBody for complex messages
-- **Optimized Queries**: Efficient SQLite queries with proper indexing
+## Why Built-in Tools Fail
 
-## 🤝 Support & Feedback
+The built-in iMessage connector relies on AppleScript, which:
+- Breaks when the Contacts app isn't running
+- Can't handle the same contact across multiple services  
+- Fails silently with no useful error messages
+- Misses phone number format variations
 
-### Found a Bug?
-Open an issue with:
-- Claude Desktop version
-- macOS version  
-- Steps to reproduce
-- Expected vs actual results
+This connector uses direct SQLite database access instead, eliminating those failure points.
 
-### Feature Requests?
-Ideas for future enhancements:
-- Contact name resolution via Contacts app
-- Group chat support
-- Attachment handling
-- Message export capabilities
+## Privacy
 
-### Success Story?
-Share how the enhanced connector helped you! We love hearing about:
-- Performance improvements you experienced
-- Features that solved your problems
-- Use cases we hadn't considered
+- All data stays on your Mac
+- Read-only database access
+- No network connections
+- Requires explicit system permission (Full Disk Access)
 
-## 📜 License
+## License
 
-MIT License - Feel free to modify, distribute, and contribute back!
-
----
-
-## 🎉 Bottom Line
-
-**Your iMessage data is valuable.** Don't let broken built-in tools prevent you from accessing it. This enhanced connector gives you the reliable, feature-rich iMessage integration that Claude Desktop should have shipped with.
-
-**Download it. Install it. Never worry about iMessage tool failures again.**
-
----
-
-*Built by developers frustrated with tools that don't work. Tested with real conversations. Proven to outperform built-in alternatives.*
+MIT - Feel free to modify and contribute back.
